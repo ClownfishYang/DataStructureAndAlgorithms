@@ -48,6 +48,18 @@ public class SortTest {
         sortTest(downTopSort);
     }
 
+    @Test
+    public void quickSortTest() {
+        QuickSort quickSort = new QuickSort();
+        sortTest(quickSort);
+    }
+
+    @Test
+    public void bubbleSortTest() {
+        BubbleSort bubbleSort = new BubbleSort();
+        sortTest(bubbleSort);
+    }
+
 
     @Test
     public void compareTest() {
@@ -60,8 +72,10 @@ public class SortTest {
     private void sortTest(AbstractSort sort) {
         log.info("{} sort test start...", sort.getClass().getSimpleName());
         Random random = new Random();
-        int size = 5000000;
-//        int size = 20;
+//        Integer[] data = {44, 145, 35, 42, 60, 28, 12, 121, 36, 144, 66};
+//        int size = data.length;
+//        int size = 5000000;
+        int size = 20;
         int max = size << 3;
         Integer[] data = new Integer[size];
         for (int i = 0; i < size; i++) {
@@ -69,9 +83,11 @@ public class SortTest {
         }
 
         log.debug("data : {}", Arrays.toString(data));
-        sort.sort(data, 1, size - 1);
+        sort.sort(data, 0, size);
+//        sort.sort(data, 1, size - 1);
         log.debug("sort data : {}", Arrays.toString(data));
-        boolean sorted = sort.isSorted(data, 1, size - 1);
+        boolean sorted = sort.isSorted(data, 0, size);
+//        boolean sorted = sort.isSorted(data, 1, size - 1);
         Assert.assertTrue(sorted);
 
         log.info("data is sorted: {}", sorted);

@@ -33,7 +33,8 @@ public class SelectSort extends AbstractSort {
                 if (less(data[j], data[min]))
                     min = j;
             }
-            exchange(data, i, min);
+            if (i != min)
+                exchange(data, i, min);
         }
     }
 

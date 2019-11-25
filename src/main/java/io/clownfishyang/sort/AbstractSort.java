@@ -1,5 +1,7 @@
 package io.clownfishyang.sort;
 
+import java.util.Arrays;
+
 /**
  * Copyright (C), 2015-2019, 深圳市环球易购电子商务有限公司<br>
  * <br>
@@ -57,6 +59,12 @@ public abstract class AbstractSort implements Sort{
      * created on 2019-11-05 11:50:58
      */
     public abstract void sortImpl(Comparable[] data, int low, int high);
+
+    @Override
+    public int compare(Comparable a, Comparable b) {
+        addComparableCount();
+        return a.compareTo(b);
+    }
 
     @Override
     public boolean less(Comparable a, Comparable b) {

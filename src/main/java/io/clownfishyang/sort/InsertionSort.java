@@ -6,10 +6,10 @@ import java.util.Arrays;
  * Copyright (C), 2015-2019, 深圳市环球易购电子商务有限公司<br>
  * 插入排序<br>
  *
- * 与选择排序 {@code SelectSort} 相同，当前索引左边的所有元素都是有序的，但最终位置不确定。<br>
+ * 从前往后遍历，从后往前比较插入。与选择排序 {@code SelectSort} 相同，当前索引左边的所有元素都是有序的，但最终位置不确定。<br>
  * 插入排序所需的时间取决于元素的初始顺序, 每次将当前索引元素与索引之前的所有元素进行比较。
  * 比较次数/交换次数：N-1/0 ~ (N * N / 2);
- * 交换次数与倒置元素数量相同，比较次数大于等于倒置元素的数量。
+ * 交换次数与倒置元素数量相同，比较次数大于等于倒置元素的数量。<br>
  * @author ClownfishYang<br>
  * created on 2019/11/4 17:01<br>
  */
@@ -17,14 +17,14 @@ public class InsertionSort extends AbstractSort {
 
     @Override
     public void sortImpl(Comparable[] data, int low, int high) {
-//        basicSort(data, low, high);
+        basicSort(data, low, high);
 //        moveSort(data, low, high);
-        binarySearchSort(data, low, high);
+//        binarySearchSort(data, low, high);
     }
 
     private void basicSort(Comparable[] data, int low, int high) {
         for (int i = low + 1; i < high; i++) {
-            for (int j = i; j > 0 && less(data[j], data[j - 1]); j--) {
+            for (int j = i; j > low && less(data[j], data[j - 1]); j--) {
                 exchange(data, j, j - 1);
             }
         }

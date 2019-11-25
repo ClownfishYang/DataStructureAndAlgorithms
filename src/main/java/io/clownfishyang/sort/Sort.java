@@ -32,6 +32,10 @@ public interface Sort {
      */
     void sort(Comparable[] data, int low, int high);
 
+    default int compare(Comparable a, Comparable b) {
+        return a.compareTo(b);
+    }
+
     /**
      *
      * 功能描述:
