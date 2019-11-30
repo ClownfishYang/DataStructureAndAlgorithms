@@ -60,6 +60,11 @@ public class SortTest {
         sortTest(bubbleSort);
     }
 
+    @Test
+    public void stackSortTest() {
+        HeapSort stackSort = new HeapSort<>();
+        sortTest(stackSort);
+    }
 
     @Test
     public void compareTest() {

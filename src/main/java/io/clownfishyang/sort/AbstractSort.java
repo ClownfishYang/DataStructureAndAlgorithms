@@ -9,12 +9,13 @@ import java.util.Arrays;
  * @author ClownfishYang<br>
  * created on 2019/11/4 17:02<br>
  */
-public abstract class AbstractSort implements Sort{
+public abstract class AbstractSort<E extends Comparable<E>> implements Sort<E>{
 
     private int comparableCount;
     private int exchangeCount;
     private long timeMillis;
 
+    @Override
     public void addComparableCount() {
         this.comparableCount++;
     }
@@ -27,6 +28,7 @@ public abstract class AbstractSort implements Sort{
         return this.comparableCount;
     }
 
+    @Override
     public void addExchangeCount() {
         this.exchangeCount++;
     }
@@ -44,7 +46,7 @@ public abstract class AbstractSort implements Sort{
     }
 
     @Override
-    public void sort(Comparable[] data, int low, int high) {
+    public void sort(E[] data, int low, int high) {
         long s = System.currentTimeMillis();
         sortImpl(data, low, high);
         this.timeMillis = System.currentTimeMillis() - s;
@@ -58,30 +60,30 @@ public abstract class AbstractSort implements Sort{
      * @auther ClownfishYang
      * created on 2019-11-05 11:50:58
      */
-    public abstract void sortImpl(Comparable[] data, int low, int high);
+    public abstract void sortImpl(E[] data, int low, int high);
 
     @Override
-    public int compare(Comparable a, Comparable b) {
+    public int compare(E a, E b) {
         addComparableCount();
         return a.compareTo(b);
     }
 
     @Override
-    public boolean less(Comparable a, Comparable b) {
+    public boolean less(E a, E b) {
         addComparableCount();
         return a.compareTo(b) < 0;
     }
 
     @Override
-    public boolean greater(Comparable a, Comparable b) {
+    public boolean greater(E a, E b) {
         addComparableCount();
         return a.compareTo(b) > 0;
     }
 
     @Override
-    public void exchange(Comparable[] data, int i, int j) {
+    public void exchange(E[] data, int i, int j) {
         if (i != j) {
-            Comparable d = data[i];
+            E d = data[i];
             data[i] = data[j];
             data[j] = d;
             addExchangeCount();
@@ -101,7 +103,7 @@ public abstract class AbstractSort implements Sort{
      * @auther ClownfishYang
      * created on 2019-11-05 11:42:36
      */
-    public int binarySearch(Comparable[] data, int fromIndex, int toIndex, Comparable key) {
+    public int binarySearch(E[] data, int fromIndex, int toIndex, E key) {
         rangeCheck(data.length, fromIndex, toIndex);
         int low = fromIndex;
         int high = toIndex - 1;
